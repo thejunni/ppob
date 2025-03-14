@@ -9,7 +9,11 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">PPOB Koperasi</a>
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                {{-- <img src="logo.png" alt="Logo" width="40" height="40" class="me-2"> --}}
+                <img src="{{ asset('logo_chm/logo_chm1.jpg') }}" alt="Koperasi CHM" width="40" height="40" class="me-2">
+                PPOB Koperasi
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -21,7 +25,7 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav>    
 
     <header class="bg-success text-white text-center py-5">
         <div class="container">
