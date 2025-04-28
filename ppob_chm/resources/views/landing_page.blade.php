@@ -77,7 +77,7 @@
         <div class="container text-center">
             <h1 class="display-4">Solusi Pembayaran PPOB Terbaik</h1>
             <p class="lead">Layanan pembayaran online yang cepat, aman, dan terpercaya</p>
-            <a href="/register" class="btn btn-light btn-lg">Daftar Sekarang</a>
+            <a href="/login" class="btn btn-light btn-lg">Ayo Beli Sekarang</a>
         </div>
     </section>
 

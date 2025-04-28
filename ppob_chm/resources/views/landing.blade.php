@@ -46,7 +46,7 @@
         <div class="container">
             <h1>Selamat Datang di PPOB Koperasi Central Hutama Mandiri</h1>
             <p class="lead">Solusi Pembayaran Online Mudah dan Cepat untuk Anggota Koperasi</p>
-            <a href="/register" class="btn btn-light">Daftar Sekarang</a>
+            <a href="/register" class="btn btn-light">Ayo Beli Sekarang</a>
         </div>
     </header>
 
