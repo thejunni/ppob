@@ -30,5 +30,8 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
-
+    'digiflazz' => [
+        'username' => env('DIGIFLAZZ_USERNAME'),
+        'api_key' => env('DIGIFLAZZ_KEY'),
+    ],
 ];

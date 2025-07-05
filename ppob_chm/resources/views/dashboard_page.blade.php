@@ -131,57 +131,126 @@
                 <h5>Saldo Nasabah: Rp. 100.000,00</h5>
             </div>
             <div class="service-grid">
-                <button class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3">
+                <a href="/pembelian-pulsa" class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3 position-relative">
                     <i data-feather="smartphone"></i>
                     <br>Pulsa
-                </button>
-                <button class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3">
+                </a>
+                <a href="/pembelian-data" class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3 position-relative">
                     <i data-feather="globe"></i>
                     <br>Paket Data
-                </button>
-                <button class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3">
+                </a>
+                <a class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3 position-relative">
                     <i data-feather="zap"></i>
                     <br>Token Listrik
-                </button><button class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3">
+                    <span class="position-absolute top-0 translate-middle badge rounded-pill bg-warning">
+                        Segera Hadir
+                        <span class="visually-hidden">unavailable</span>
+                      </span>
+                </a>
+                <a class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3 position-relative">
                     <i data-feather="credit-card"></i>
                     <br>Tagihan Listrik
-                </button><button class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3">
+                    <span class="position-absolute top-0 translate-middle badge rounded-pill bg-warning">
+                        Segera Hadir
+                        <span class="visually-hidden">unavailable</span>
+                      </span>
+                </a>
+                <a class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3 position-relative">
                     <i data-feather="phone"></i>
                     <br>Telkom
-                </button><button class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3">
+                    <span class="position-absolute top-0 translate-middle badge rounded-pill bg-warning">
+                        Segera Hadir
+                        <span class="visually-hidden">unavailable</span>
+                      </span>
+                </a>
+                <a class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3 position-relative">
                     <i data-feather="file-text"></i>
                     <br>Pascabayar
-                </button><button class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3">
+                    <span class="position-absolute top-0 translate-middle badge rounded-pill bg-warning">
+                        Segera Hadir
+                        <span class="visually-hidden">unavailable</span>
+                      </span>
+                </a>
+                <a class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3 position-relative">
                     <i data-feather="home"></i>
                     <br>PDAM
-                </button><button class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3">
+                    <span class="position-absolute top-0 translate-middle badge rounded-pill bg-warning">
+                        Segera Hadir
+                        <span class="visually-hidden">unavailable</span>
+                      </span>
+                </a>
+                <a class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3 position-relative">
                     <i data-feather="heart"></i>
                     <br>BPJS
-                </button><button class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3">
+                    <span class="position-absolute top-0 translate-middle badge rounded-pill bg-warning">
+                        Segera Hadir
+                        <span class="visually-hidden">unavailable</span>
+                      </span>
+                </a>
+                <a class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3 position-relative">
                     <i data-feather="dollar-sign"></i>
                     <br>Angsuran
-                </button><button class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3">
+                    <span class="position-absolute top-0 translate-middle badge rounded-pill bg-warning">
+                        Segera Hadir
+                        <span class="visually-hidden">unavailable</span>
+                      </span>
+                </a>
+                <a class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3 position-relative">
                     <i data-feather="shield"></i>
                     <br>Asuransi
-                </button><button class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3">
+                    <span class="position-absolute top-0 translate-middle badge rounded-pill bg-warning">
+                        Segera Hadir
+                        <span class="visually-hidden">unavailable</span>
+                      </span>
+                </a>
+                <a class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3 position-relative">
                     <i data-feather="credit-card"></i>
                     <br>Kartu Kredit
-                </button><button class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3">
+                    <span class="position-absolute top-0 translate-middle badge rounded-pill bg-warning">
+                        Segera Hadir
+                        <span class="visually-hidden">unavailable</span>
+                      </span>
+                </a>
+                <a class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3 position-relative">
                     <i data-feather="gift"></i>
                     <br>Zakat
-                </button><button class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3">
+                    <span class="position-absolute top-0 translate-middle badge rounded-pill bg-warning">
+                        Segera Hadir
+                        <span class="visually-hidden">unavailable</span>
+                      </span>
+                </a>
+                <a class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3 position-relative">
                     <i data-feather="gamepad"></i>
                     <br>Voucher Game
-                </button><button class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3">
+                    <span class="position-absolute top-0 translate-middle badge rounded-pill bg-warning">
+                        Segera Hadir
+                        <span class="visually-hidden">unavailable</span>
+                      </span>
+                </a>
+                <a class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3 position-relative">
                     <i data-feather="shopping-bag"></i>
                     <br>Voucher Digital
-                </button><button class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3">
+                    <span class="position-absolute top-0 translate-middle badge rounded-pill bg-warning">
+                        Segera Hadir
+                        <span class="visually-hidden">unavailable</span>
+                      </span>
+                </a>
+                <a class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3 position-relative">
                     <i data-feather="tv"></i>
                     <br>Internet dan TV Kabel
-                </button><button class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3">
+                    <span class="position-absolute top-0 translate-middle badge rounded-pill bg-warning">
+                        Segera Hadir
+                        <span class="visually-hidden">unavailable</span>
+                      </span>
+                </a>
+                <a class="btn btn-light d-flex flex-column align-items-center justify-content-center p-3 position-relative">
                     <i data-feather="play-circle"></i>
                     <br>Streaming
-                </button>       
+                    <span class="position-absolute top-0 translate-middle badge rounded-pill bg-warning">
+                        Segera Hadir
+                        <span class="visually-hidden">unavailable</span>
+                      </span>
+                </a>       
             </div>
         </div>
     </div>

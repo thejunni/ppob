@@ -51,10 +51,15 @@
             padding: 20px 0;
             text-align: center;
         }
+        .navbar {
+            background-color: rgba(14, 117, 9, 0.5);
+            backdrop-filter: blur(8px);
+        }
+
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="{{ asset('logo_chm/logo_chm1.jpg') }}" alt="Koperasi CHM" width="40" height="40" class="me-2">
@@ -66,7 +71,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#features">Fitur</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#footer">Kontak</a></li>
                     <li class="nav-item"><a class="nav-link btn btn-success text-white" href="/login">Masuk</a></li>
                 </ul>
             </div>
@@ -104,10 +109,11 @@
         </div>
     </section>
 
-    <footer class="footer">
-        <p>&copy; 2025 PPOB Koperasi Central Hutama Mandiri. All rights reserved.</p>
-    </footer>
-
+    <section id="footer" class="footer">
+        <footer class="footer">
+            <p>&copy; 2025 PPOB Koperasi Central Hutama Mandiri. All rights reserved.</p>
+        </footer>    
+    </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
