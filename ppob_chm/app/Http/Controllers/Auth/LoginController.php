@@ -21,6 +21,14 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            $user = Auth::user();
+
+            if ($user->role === 'admin') {
+                return redirect()->intended('admin/dashboard');
+            }
+
             return redirect()->intended('/dashboard');
         }
 
@@ -29,10 +37,16 @@ class LoginController extends Controller
         ]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+    
+        // Invalidate the session
+        $request->session()->invalidate();
+    
+        // Regenerate CSRF token
+        $request->session()->regenerateToken();
+    
         return redirect('/');
     }
 }
-
