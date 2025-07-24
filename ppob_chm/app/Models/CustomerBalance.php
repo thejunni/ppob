@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomerBalance extends Model
 {
+    protected $table = 'customer_balances';
     protected $fillable = ['user_id', 'balance'];
 
     public function user()

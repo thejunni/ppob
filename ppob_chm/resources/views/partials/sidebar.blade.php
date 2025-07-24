@@ -13,8 +13,9 @@
     <div class="logout mt-auto">
         <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button type="submit" class="btn btn-link text-danger p-0 m-0 align-baseline">Logout</button>
+            <button type="submit" class="btn btn-danger w-50">
+                <i class="bi bi-box-arrow-right me-1"></i> Logout
+            </button>
         </form>
-    </div>    
-    
+    </div>   
 </div>

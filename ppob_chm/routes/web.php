@@ -21,12 +21,15 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 //user
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard');
-    Route::get('/pembelian-pulsa', [PurchasingController::class, 'index'])->name('purchasing');
-    Route::get('/pembelian-data', [PurchasingDataController::class, 'index'])->name('purchasing');
+    Route::get('/pembelian-pulsa', [PurchasingController::class, 'index'])->name('purchasing-pulsa');
+    Route::get('/pembelian-data', [PurchasingDataController::class, 'index'])->name('purchasing-data');
     Route::get('/paket-data/{provider}', [PurchasingDataController::class, 'getByProvider']);
     Route::post('/pembelian/paket-data', [PurchasingDataController::class, 'store']);
     Route::get('/produk/by-provider/{provider}', [PurchasingDataController::class, 'getProdukByProvider']);
     Route::get('/pulsa/by-provider/{provider}', [PurchasingController::class, 'getProdukByProvider']);
+    Route::post('/pembelian/pulsa', [PurchasingController::class, 'storePulsa'])->name('pembelian.pulsa.store');
+    Route::post('/pembelian/paket', [PurchasingDataController::class, 'storePaket'])->name('pembelian.paket.store');
+    Route::get('/riwayat-pembelian', [DashboardController::class, 'riwayatPembelian'])->name('riwayat.pembelian');
 
 });
 

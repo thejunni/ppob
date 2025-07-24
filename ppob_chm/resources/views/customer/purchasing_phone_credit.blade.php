@@ -4,18 +4,37 @@
 
 @section('content')
 <script>
-    const saldoNasabah = {{ $saldo ?? 100000 }};
+    const saldoNasabah = {{ $saldo ?? 0 }};
 </script>
 
 <div class="bg-success text-white fw-bold px-4 py-2 rounded mb-3">
     Saldo Nasabah : Rp {{ number_format($saldo ?? 0, 0, ',', '.') }}
 </div>
 
+@if (session('success'))
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const modal = new bootstrap.Modal(document.getElementById('modalBerhasil'));
+            modal.show();
+        });
+    </script>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 <div class="card shadow-sm p-4">
     <h4 class="mb-4"><i data-feather="smartphone"></i> Beli Pulsa</h4>
 
-    <form method="POST" action="#">
+    <form method="POST" action="{{ route('pembelian.pulsa.store') }}" id="formPembelian">
         @csrf
+        <input type="hidden" id="providerHidden" name="provider">
+        <input type="hidden" id="nominal" name="nominal">
+        <input type="hidden" id="namaPaket" name="namaPaket">
+        <input type="hidden" id="jenisLayanan" name="jenisLayanan" value="pulsa">
 
         <div class="input-group mb-3">
             <span class="input-group-text"><i data-feather="phone"></i></span>
@@ -50,30 +69,11 @@
         <div class="d-grid mt-4">
             <button type="button" class="btn btn-success" onclick="cekDanTampilkanModal()">Beli</button>
         </div>
-
-        <input type="hidden" id="nominal" name="nominal">
-        <input type="hidden" id="providerHidden" name="provider">
-        <input type="hidden" id="namaPaket" name="namaPaket">
     </form>
 </div>
 
 @include('partials.modal-checkout')
-
-<!-- Modal Pembelian Berhasil -->
-<div class="modal fade" id="modalBerhasil" tabindex="-1" aria-labelledby="modalBerhasilLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content text-center p-4">
-            <div class="modal-body">
-                <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" fill="none" stroke="#28a745" stroke-width="4" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" stroke="#28a745" fill="none" />
-                    <path d="M8 12l2.5 2.5L16 9" stroke="#28a745" fill="none" />
-                </svg>
-                <h5 class="fw-bold mt-4">Pembelian Berhasil</h5>
-                <button type="button" class="btn btn-success mt-3" data-bs-dismiss="modal">Tutup</button>
-            </div>
-        </div>
-    </div>
-</div>
+@include('partials.modal-berhasil')
 @endsection
 
 @push('scripts')
@@ -115,8 +115,8 @@
     });
 
     function tampilkanPlaceholderNominal(text) {
-        const container = document.getElementById('nominalContainer');
-        container.innerHTML = `<div class="col-12 text-muted text-center">${text}</div>`;
+        document.getElementById('nominalContainer').innerHTML =
+            `<div class="col-12 text-muted text-center">${text}</div>`;
     }
 
     function tampilkanNominalDariDB(provider) {
@@ -126,66 +126,60 @@
         fetch(`/pulsa/by-provider/${provider}`)
             .then(res => res.json())
             .then(data => {
-                if (!data.length) {
-                    tampilkanPlaceholderNominal("Belum ada produk untuk provider ini.");
-                    return;
-                }
-
+                if (!data.length) return tampilkanPlaceholderNominal("Belum ada produk untuk provider ini.");
                 container.innerHTML = '';
                 data.forEach(item => {
                     const nominal = item.harga_jual;
-                    const label = `${item.nama} (Rp ${nominal.toLocaleString('id-ID')})`;
-
                     const div = document.createElement('div');
                     div.className = 'col-6 col-md-4';
                     div.innerHTML = `
-                        <div class="nominal-button text-center py-2 border rounded small" style="cursor:pointer;" onclick="pilihNominal(${nominal}, '${item.nama}')" id="btn-${nominal}">
-                            ${label}
+                        <div class="nominal-button text-center py-2 border rounded small" style="cursor:pointer;" 
+                             onclick="pilihNominal(${nominal}, '${item.nama}')" id="btn-${nominal}">
+                            ${item.nama} (Rp ${nominal.toLocaleString('id-ID')})
                         </div>`;
                     container.appendChild(div);
                 });
             })
-            .catch(() => {
-                tampilkanPlaceholderNominal("Gagal memuat data.");
-            });
+            .catch(() => tampilkanPlaceholderNominal("Gagal memuat data."));
     }
 
-    function pilihNominal(nominal, namaPaket = '') {
+    function pilihNominal(nominal, namaPaket) {
         document.getElementById('nominal').value = nominal;
         document.getElementById('namaPaket').value = namaPaket;
         document.getElementById('harga').innerText = 'Rp ' + nominal.toLocaleString('id-ID');
 
-        document.querySelectorAll('.nominal-button').forEach(btn => {
-            btn.classList.remove('bg-success', 'text-white');
-        });
-        const tombol = document.getElementById('btn-' + nominal);
-        if (tombol) tombol.classList.add('bg-success', 'text-white');
+        document.querySelectorAll('.nominal-button').forEach(btn =>
+            btn.classList.remove('bg-success', 'text-white')
+        );
+        document.getElementById('btn-' + nominal)?.classList.add('bg-success', 'text-white');
     }
 
     function cekDanTampilkanModal() {
         const nominal = parseInt(document.getElementById('nominal').value);
-        const total = nominal;
-        const metode = document.getElementById('jenisPembayaran').value;
         const nomor = document.getElementById('nomorTujuan').value;
+        const metode = document.getElementById('jenisPembayaran').value;
 
         if (!nominal || isNaN(nominal)) {
-            return Swal.fire({ icon: 'warning', title: 'Pilih Nominal!', text: 'Silakan pilih nominal pembelian terlebih dahulu.' });
+            return Swal.fire({ icon: 'warning', title: 'Pilih Nominal!', text: 'Silakan pilih nominal terlebih dahulu.' });
         }
 
         if (!nomor || nomor.length < 8) {
-            return Swal.fire({ icon: 'warning', title: 'Nomor Tidak Valid!', text: 'Silakan masukkan nomor tujuan yang valid.' });
+            return Swal.fire({ icon: 'warning', title: 'Nomor Tidak Valid!', text: 'Silakan masukkan nomor yang valid.' });
         }
 
-        if (saldoNasabah < total) {
-            return Swal.fire({ icon: 'error', title: 'Saldo Tidak Cukup!', text: 'Saldo Anda tidak mencukupi untuk transaksi ini.' });
+        if (!metode) {
+            return Swal.fire({ icon: 'warning', title: 'Pilih Pembayaran!', text: 'Silakan pilih jenis pembayaran.' });
         }
 
-        const provider = document.getElementById('providerHidden').value || '-';
-        document.getElementById('modalJenis').innerText = provider + ' - ' + document.getElementById('namaPaket').value;
+        if (metode === 'saldo' && saldoNasabah < nominal) {
+            return Swal.fire({ icon: 'error', title: 'Saldo Tidak Cukup!', text: 'Saldo Anda tidak mencukupi.' });
+        }
+
+        document.getElementById('modalJenis').innerText = document.getElementById('providerHidden').value + ' - ' + document.getElementById('namaPaket').value;
         document.getElementById('modalNomor').innerText = nomor;
-        document.getElementById('modalHarga').innerText = 'Rp ' + total.toLocaleString('id-ID');
-        document.getElementById('modalSubtotal').innerText = 'Rp ' + total.toLocaleString('id-ID');
-        document.getElementById('modalTotal').innerText = 'Rp ' + total.toLocaleString('id-ID');
+        document.getElementById('modalHarga').innerText = 'Rp ' + nominal.toLocaleString('id-ID');
+        document.getElementById('modalSubtotal').innerText = 'Rp ' + nominal.toLocaleString('id-ID');
+        document.getElementById('modalTotal').innerText = 'Rp ' + nominal.toLocaleString('id-ID');
         document.getElementById('modalPembayaran').innerText = metode.toUpperCase();
 
         const modal = new bootstrap.Modal(document.getElementById('checkoutModal'));
@@ -193,11 +187,7 @@
     }
 
     document.getElementById('btnBayarModal')?.addEventListener('click', function () {
-        const checkoutModal = bootstrap.Modal.getInstance(document.getElementById('checkoutModal'));
-        checkoutModal.hide();
-
-        const modalBerhasil = new bootstrap.Modal(document.getElementById('modalBerhasil'));
-        modalBerhasil.show();
+        document.getElementById('formPembelian').submit();
     });
 </script>
 @endpush

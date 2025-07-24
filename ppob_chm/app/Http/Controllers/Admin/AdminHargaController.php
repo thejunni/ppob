@@ -31,7 +31,11 @@ class AdminHargaController extends Controller
             'sign' => $signature,
         ];
     
-        $response = Http::withoutVerifying()->post('https://api.digiflazz.com/v1/cek-saldo', $payload);
+        $isTesting = env('DIGIFLAZZ_TESTING', false);
+        $response = $isTesting
+            ? Http::withoutVerifying()->post('https://api.digiflazz.com/v1/cek-saldo', $payload)
+            : Http::post('https://api.digiflazz.com/v1/cek-saldo', $payload);
+            
         $resultAPI = $response->json();
         $totalSaldo = $resultAPI['data']['deposit'] ?? 0;
     
@@ -60,13 +64,16 @@ class AdminHargaController extends Controller
             'username' => $username,
             'sign' => $signature,
         ];
-        $response = Http::withoutVerifying()
-                        ->post('https://api.digiflazz.com/v1/cek-saldo', $payload);
+        $isTesting = env('DIGIFLAZZ_TESTING', false);
+        $response = $isTesting
+            ? Http::withoutVerifying()->post('https://api.digiflazz.com/v1/cek-saldo', $payload)
+            : Http::post('https://api.digiflazz.com/v1/cek-saldo', $payload);
 
         $resultAPI = $response->json();
         $totalSaldo = $resultAPI['data']['deposit'] ?? 0;
-        $response = Http::withoutVerifying()
-                        ->post('https://api.digiflazz.com/v1/price-list', $payload);
+        $response = $isTesting
+        ? Http::withoutVerifying()->post('https://api.digiflazz.com/v1/price-list', $payload)
+        : Http::post('https://api.digiflazz.com/v1/price-list', $payload);
 
         $produkList = $response->json()['data'];
         return view('admin.tambah_produk', compact('totalSaldo','produkList'));
@@ -90,7 +97,10 @@ class AdminHargaController extends Controller
             'sign' => $signature,
         ];
 
-        $response = Http::withoutVerifying()->post('https://api.digiflazz.com/v1/price-list', $payload);
+        $isTesting = env('DIGIFLAZZ_TESTING', false);
+        $response = $isTesting
+        ? Http::withoutVerifying()->post('https://api.digiflazz.com/v1/price-list', $payload)
+        : Http::post('https://api.digiflazz.com/v1/price-list', $payload);
         $produkList = $response['data'] ?? [];
 
         $produkTerpilih = collect($produkList)->firstWhere('buyer_sku_code', $request->kode);
@@ -125,7 +135,10 @@ class AdminHargaController extends Controller
             'sign' => $signature,
         ];
     
-        $response = Http::withoutVerifying()->post('https://api.digiflazz.com/v1/cek-saldo', $payload);
+        $isTesting = env('DIGIFLAZZ_TESTING', false);
+        $response = $isTesting
+        ? Http::withoutVerifying()->post('https://api.digiflazz.com/v1/cek-saldo', $payload)
+        : Http::post('https://api.digiflazz.com/v1/cek-saldo', $payload);
         $resultAPI = $response->json();
         $totalSaldo = $resultAPI['data']['deposit'] ?? 0;
         $produk = Produk::findOrFail($id);

@@ -134,6 +134,14 @@
         .btn-layanan i {
             color: white !important;
         }
+        .custom-active {
+            background-color: #ffcc00 !important;  /* warna kuning misalnya */
+            color: #000 !important;                /* teks hitam */
+            border: 1px solid #cc9900 !important;  /* border kuning gelap */
+        }
+        .custom-active:hover {
+            background-color: #e6b800 !important;  /* warna saat hover */
+        }
     </style>
 </head>
 <body>
