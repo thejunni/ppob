@@ -16,5 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
-    })->create();
+    
+    })
+    // ->withProviders([
+    //     // Daftarkan provider Anda di sini
+    //     App\Providers\::class,])
+    ->create();

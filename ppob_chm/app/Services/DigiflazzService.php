@@ -45,7 +45,6 @@ class DigiFlazzService
         return $response->json();
     }
 
-    // Contoh fungsi pembelian pulsa
     public function orderPulsa($customer_number, $buyer_sku_code, $ref_id)
     {
         $signature = $this->generateSignature($ref_id);

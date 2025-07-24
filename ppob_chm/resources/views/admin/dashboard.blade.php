@@ -68,11 +68,12 @@
             <a href="#" class="btn btn-sm btn-primary">Lihat Semua</a>
         </div>
         <div class="card-body table-responsive">
-            <table class="table table-hover table-sm">
-                <thead>
+            <table class="table table-hover table-sm align-middle">
+                <thead class="table-light">
                     <tr>
                         <th>Tanggal</th>
-                        <th>Agen</th>
+                        <th>Nasabah</th>
+                        <th>Provider</th>
                         <th>Produk</th>
                         <th>Harga</th>
                         <th>Profit</th>
@@ -83,9 +84,10 @@
                     @forelse ($transaksiTerbaru as $trx)
                     <tr>
                         <td>{{ $trx->created_at->format('d/m/Y H:i') }}</td>
-                        <td>{{ $trx->provider ?? '-' }}</td>
-                        <td>{{ $trx->produk ?? '-' }}</td>
-                        <td>Rp {{ number_format($trx->harga_jual, 0, ',', '.') }}</td>
+                        <td>{{ $trx->user->name ?? '-' }}</td>
+                        <td>{{ $trx->produk->provider ?? '-' }}</td>
+                        <td>{{ $trx->produk->nama ?? '-' }}</td>
+                        <td>Rp {{ number_format($trx->harga, 0, ',', '.') }}</td>
                         <td>Rp {{ number_format($trx->profit, 0, ',', '.') }}</td>
                         <td>
                             <span class="badge 
@@ -99,7 +101,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="6" class="text-center text-muted">Belum ada transaksi</td>
+                        <td colspan="7" class="text-center text-muted">Belum ada transaksi</td>
                     </tr>
                     @endforelse
                 </tbody>
