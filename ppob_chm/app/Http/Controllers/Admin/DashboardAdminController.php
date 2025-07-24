@@ -67,11 +67,7 @@ class DashboardAdminController extends Controller
 
     // Hitung total harga modal dan profit dari transaksi sukses
     $totalBiaya = TransaksiPulsa::where('status', 'sukses')->sum('harga_modal');
-    // $totalProfit = TransaksiPulsa::where('status', 'sukses')->sum('profit');
-    $totalProfit = TransaksiPulsa::where('status', 'sukses')
-                ->join('produks', 'transaksi_pulsas.produk_id', '=', 'produks.id')
-                ->selectRaw('SUM(transaksi_pulsas.harga - produks.harga_modal) as total_profit')
-                ->value('total_profit');
+    $totalProfit = TransaksiPulsa::where('status', 'sukses')->sum('profit');
 
     // Total saldo dari provider (cek ke API Digiflazz)
     $username = env('DIGIFLAZZ_USERNAME');
